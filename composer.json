@@ -1,0 +1,23 @@
+{
+    "name": "sunaloe/apollo-laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "lkboy",
+            "email": "lk88boy@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "~7.0",
+        "multilinguals/apollo-client": "^0.1.2",
+        "illuminate/support": "~5.5",
+        "illuminate/redis": "^5.5",
+        "predis/predis": "^1.1",
+        "illuminate/console": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sunaloe\\ApolloLaravel":"src/"
+        }
+    }
+}
