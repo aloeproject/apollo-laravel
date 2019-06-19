@@ -30,9 +30,17 @@ class ApolloService
             }
         }
 
+        if (empty($newConfig)) {
+            echo "No configuration data\n";
+            return;
+        }
+
 
         $redisKey = config('apollo.data_redis_key');
-        $this->cache->set($redisKey,json_encode($newConfig));
+        $st = $this->cache->set($redisKey,json_encode($newConfig));
+        if (!$st) {
+            throw new \Exception('cache write fail');
+        }
         echo date('c').":update success\n";
     }
 
@@ -50,7 +58,11 @@ class ApolloService
         $this->updateConfig($list);
     }
 
-    public static function use($connection)
+    /**
+     * @param $connection
+     * @throws \Exception
+     */
+    public static function useConfig($connection)
     {
         if (is_null($config = config("database.redis.{$connection}"))) {
             throw new \Exception("Redis connection [{$connection}] has not been configured.");

@@ -53,7 +53,7 @@ class ApolloServiceProvider extends ServiceProvider
             __DIR__ . '/../config/apollo.php', 'apollo'
         );
 
-        ApolloService::use(config('apollo.redis_use'));
+        ApolloService::useConfig(config('apollo.redis_use'));
     }
 
     protected function registerCommands()
