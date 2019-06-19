@@ -9,7 +9,7 @@ return [
     /**
      *
      */
-    'save_dir'=>'/data/logs/pay_order/',
+    'save_dir'=>'./',
 
     /**
      * apollo 配置appid
