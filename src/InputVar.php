@@ -3,19 +3,20 @@
 
 namespace Sunaloe\ApolloLaravel;
 
-
-use Psr\SimpleCache\CacheInterface;
 use Illuminate\Contracts\Cache\Factory as FactoryContract;
 
 class InputVar
 {
     private $cache = null;
-    
+
     public function __construct(FactoryContract $cache)
     {
         $this->cache = $cache;
     }
 
+    /**
+     * @return array|mixed
+     */
     private function getData()
     {
         $ret = [];

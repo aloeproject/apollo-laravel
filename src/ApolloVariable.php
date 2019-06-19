@@ -18,6 +18,10 @@ class ApolloVariable
         $this->immutable = $immutable;
     }
 
+    /**
+     * @param $name
+     * @return array|false|null|string
+     */
     public function getEnvironmentVariable($name)
     {
         switch (true) {
@@ -31,6 +35,10 @@ class ApolloVariable
         }
     }
 
+    /**
+     * @param $name
+     * @param null $value
+     */
     public function setEnvironmentVariable($name, $value = null)
     {
         // Don't overwrite existing environment variables if we're immutable

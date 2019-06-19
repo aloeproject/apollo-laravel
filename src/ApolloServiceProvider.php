@@ -29,7 +29,7 @@ class ApolloServiceProvider extends ServiceProvider
     {
 
         $this->app->singleton('apollo.cache', function ($app) {
-            $app['config']->set('cache',config('apollo.cache'));
+            $app['config']->set('cache', config('apollo.cache'));
             $obj = new CacheManager($app);
             return $obj;
         });
@@ -42,8 +42,6 @@ class ApolloServiceProvider extends ServiceProvider
         $this->app->singleton('apollo.variable', function () {
             return new ApolloVariable();
         });
-
-
     }
 
     protected function configure()

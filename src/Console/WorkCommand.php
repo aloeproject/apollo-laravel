@@ -9,7 +9,6 @@
 namespace Sunaloe\ApolloLaravel\Console;
 
 use Illuminate\Console\Command;
-use Org\Multilinguals\Apollo\Client\ApolloClient;
 
 class WorkCommand extends Command
 {
@@ -42,13 +41,13 @@ class WorkCommand extends Command
         echo "start [$pid]\n";
         $err = '';
         try {
-            $client->start(function () use ($apollo,&$err){
+            $err = $client->start(function () use ($apollo, &$err) {
                 $err = $apollo->startCallback();
             });
         } catch (\Exception $e) {
-            $err = $e->getTraceAsString();
+            $err = $e->getMessage();
         }
 
-        echo $err."\n";
+        echo $err . "\n";
     }
 }

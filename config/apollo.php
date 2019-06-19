@@ -9,7 +9,7 @@ return [
     /**
      *
      */
-    'save_dir'=>'./',
+    'save_dir' => './',
 
     /**
      * apollo 配置appid
@@ -29,23 +29,18 @@ return [
     /**
      * 数据 key 前缀
      */
-    'prefix'=>'apollo.',
-    
+    'prefix' => 'apollo.',
+
     /**
      * redis 使用的默认连接
      */
-    'redis_use'=>'default',
+    'redis_use' => 'default',
 
-    /**
-     * 缓存前缀
-     */
-    'prefix'=>'',
-    
     /**
      * 配置缓存
      */
-    'cache'=>[
-        'default'=>'file',
+    'cache' => [
+        'default' => 'file',
 
         'stores' => [
 

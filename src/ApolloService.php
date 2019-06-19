@@ -11,12 +11,16 @@ use Sunaloe\ApolloLaravel\Contracts\Operate;
 class ApolloService
 {
     private $cache;
-    
+
     public function __construct(FactoryContract $cache)
     {
         $this->cache = $cache;
     }
 
+    /**
+     * @param $fileList
+     * @throws \Exception
+     */
     private function updateConfig($fileList)
     {
         $newConfig = [];
@@ -37,13 +41,14 @@ class ApolloService
 
 
         $redisKey = config('apollo.data_redis_key');
-        $st = $this->cache->set($redisKey,json_encode($newConfig));
-        if (!$st) {
-            throw new \Exception('cache write fail');
-        }
-        echo date('c').":update success\n";
+        $this->cache->forever($redisKey, json_encode($newConfig));
+
+        echo date('c') . ":update success\n";
     }
 
+    /**
+     * @return ApolloClient
+     */
     public function getServer()
     {
         $server = new ApolloClient(
@@ -52,6 +57,9 @@ class ApolloService
         return $server;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function startCallback()
     {
         $list = glob(config('apollo.save_dir') . DIRECTORY_SEPARATOR . 'apolloConfig.*');
