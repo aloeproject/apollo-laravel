@@ -27,16 +27,39 @@ return [
     'data_redis_key' => 'apollo_data',
 
     /**
+     * 数据 key 前缀
+     */
+    'prefix'=>'apollo.',
+    
+    /**
      * redis 使用的默认连接
      */
-    'redis_use'=>'apollo',
+    'redis_use'=>'default',
 
     /**
-     * redis 前缀
+     * 缓存前缀
      */
-    'redis_prefix'=>'',
+    'prefix'=>'',
+    
     /**
-     * key 前缀
+     * 配置缓存
      */
-    'prefix'=>'apollo.'
+    'cache'=>[
+        'default'=>'file',
+
+        'stores' => [
+
+            'file' => [
+                'driver' => 'file',
+                'path' => storage_path('framework/cache/data'),
+            ],
+
+
+            'redis' => [
+                'driver' => 'redis',
+                'connection' => 'apollo',
+            ],
+        ],
+    ],
+
 ];

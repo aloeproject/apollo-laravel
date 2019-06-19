@@ -10,7 +10,6 @@ namespace Sunaloe\ApolloLaravel\Console;
 
 use Illuminate\Console\Command;
 use Org\Multilinguals\Apollo\Client\ApolloClient;
-use Sunaloe\ApolloLaravel\ApolloLaravel;
 
 class WorkCommand extends Command
 {
@@ -36,9 +35,8 @@ class WorkCommand extends Command
      */
     public function handle()
     {
-        $apollo = app('apollo.laravel');
+        $apollo = app('apollo.service');
         $client = $apollo->getServer();
-
 
         $pid = getmypid();
         echo "start [$pid]\n";

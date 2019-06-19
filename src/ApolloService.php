@@ -1,24 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lkboy
- * Date: 2019/6/6
- * Time: 17:45
- */
+
 
 namespace Sunaloe\ApolloLaravel;
 
 
 use Org\Multilinguals\Apollo\Client\ApolloClient;
+use Illuminate\Contracts\Cache\Factory as FactoryContract;
 use Sunaloe\ApolloLaravel\Contracts\Operate;
 
-class ApolloLaravel
+class ApolloService
 {
-    private $operate = null;
-
-    public function __construct(Operate $operate)
+    private $cache;
+    
+    public function __construct(FactoryContract $cache)
     {
-        $this->operate = $operate;
+        $this->cache = $cache;
     }
 
     private function updateConfig($fileList)
@@ -36,7 +32,7 @@ class ApolloLaravel
 
 
         $redisKey = config('apollo.data_redis_key');
-        $this->operate->set($redisKey,json_encode($newConfig));
+        $this->cache->set($redisKey,json_encode($newConfig));
         echo date('c').":update success\n";
     }
 
@@ -61,7 +57,7 @@ class ApolloLaravel
         }
 
         config(['database.redis.apollo' => array_merge($config, [
-            'options' => ['prefix' => config('apollo.redis_prefix') ?: 'apollo:'],
+            'options' => ['prefix' => config('apollo.prefix') ?: 'apollo:'],
         ])]);
     }
 

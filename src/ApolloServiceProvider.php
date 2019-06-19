@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lkboy
- * Date: 2019/6/6
- * Time: 19:54
- */
+
 
 namespace Sunaloe\ApolloLaravel;
 
 
+use Illuminate\Cache\CacheManager;
 use Illuminate\Support\ServiceProvider;
 
 class ApolloServiceProvider extends ServiceProvider
@@ -16,8 +12,8 @@ class ApolloServiceProvider extends ServiceProvider
     public function boot()
     {
         if (!$this->app->runningInConsole()) {
-            $input = new VariableInput($this->app['apollo.variable'], $this->app['apollo.operate']);
-            $input->setData();
+            $input = new InputVar($this->app['apollo.cache']);
+            $input->input();
         }
     }
 
@@ -31,12 +27,15 @@ class ApolloServiceProvider extends ServiceProvider
 
     protected function registerServices()
     {
-        $this->app->singleton('apollo.operate', function ($app) {
-            return new RedisOperate($app['redis']);
+
+        $this->app->singleton('apollo.cache', function ($app) {
+            $app['config']->set('cache',config('apollo.cache'));
+            $obj = new CacheManager($app);
+            return $obj;
         });
 
-        $this->app->singleton('apollo.laravel', function ($app) {
-            return new ApolloLaravel($app['apollo.operate']);
+        $this->app->singleton('apollo.service', function ($app) {
+            return new ApolloService($app['apollo.cache']);
         });
 
 
@@ -54,7 +53,7 @@ class ApolloServiceProvider extends ServiceProvider
             __DIR__ . '/../config/apollo.php', 'apollo'
         );
 
-        ApolloLaravel::use(config('apollo.redis_use'));
+        ApolloService::use(config('apollo.redis_use'));
     }
 
     protected function registerCommands()
