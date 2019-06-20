@@ -16,10 +16,23 @@ Apollo（阿波罗）是携程框架部门研发的分布式配置中心，能�
 
 composer require sunaloe/apollo-laravel
 
+### laravel
+
+- 配置引入
+把 /apollo-laravel/config/apollo.php 拷贝放到配置目录
+
+- 服务提供者引入
+
+```php
+ 'providers' => [
+        \Sunaloe\ApolloLaravel\ApolloLaravelServiceProvider::class,
+    ],
+```
+
 ### lumen
 
 - 配置引入
-把 /apollo-laravel/config/apollo.php 放到配置目录引入
+把 /apollo-laravel/config/apollo.php 拷贝放到配置目录
 
 ```php
     $app->configure('apollo');
