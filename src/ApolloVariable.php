@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lkboy
- * Date: 2019/6/11
- * Time: 06:49
- */
+
 
 namespace Sunaloe\ApolloLaravel;
 
@@ -41,14 +36,10 @@ class ApolloVariable
      */
     public function setEnvironmentVariable($name, $value = null)
     {
-        // Don't overwrite existing environment variables if we're immutable
-        // Ruby's dotenv does this with `ENV[key] ||= value`.
         if ($this->immutable && $this->getEnvironmentVariable($name) !== null) {
             return;
         }
 
-        // If PHP is running as an Apache module and an existing
-        // Apache environment variable exists, overwrite it
         if (function_exists('apache_getenv') && function_exists('apache_setenv') && apache_getenv($name) !== false) {
             apache_setenv($name, $value);
         }
@@ -63,7 +54,6 @@ class ApolloVariable
 
     public function clearEnvironmentVariable($name)
     {
-        // Don't clear anything if we're immutable.
         if ($this->immutable) {
             return;
         }
