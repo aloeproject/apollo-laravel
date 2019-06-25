@@ -29,7 +29,7 @@ return [
     /**
      * 数据 key 前缀
      */
-    'prefix' => 'apollo.',
+    'prefix' => 'apollo:',
 
     /**
      * redis 使用的默认连接
