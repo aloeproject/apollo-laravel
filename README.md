@@ -58,7 +58,7 @@ php artisan apollo:work
 
 #### 使用配置
 ```php
-env('apollo.配置名')
+env('apollo:配置名')
 ```
 
 ## License
