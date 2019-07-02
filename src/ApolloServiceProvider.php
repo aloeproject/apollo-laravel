@@ -6,6 +6,7 @@ namespace Sunaloe\ApolloLaravel;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\ServiceProvider;
+use Sunaloe\ApolloLaravel\Contracts\Apollo;
 
 class ApolloServiceProvider extends ServiceProvider
 {
@@ -42,6 +43,10 @@ class ApolloServiceProvider extends ServiceProvider
         $this->app->singleton('apollo.variable', function () {
             return new ApolloVariable();
         });
+
+        $this->app->singleton('apollo', function ($app) {
+            return new ApolloManager($app);
+        });
     }
 
     protected function configure()
@@ -61,4 +66,6 @@ class ApolloServiceProvider extends ServiceProvider
             return;
         }
     }
+
+
 }

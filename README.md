@@ -61,6 +61,11 @@ php artisan apollo:work
 env('apollo:配置名')
 ```
 
+### 重新更新env变量
+```php
+\Sunaloe\ApolloLaravel\Facades\Apollo::resetConfig();
+```
+
 ## License
 
 - MIT
