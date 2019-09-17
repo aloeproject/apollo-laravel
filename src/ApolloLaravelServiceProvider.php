@@ -11,10 +11,8 @@ class ApolloLaravelServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        if (!$this->app->runningInConsole()) {
-            $input = new InputVar($this->app['apollo.cache']);
-            $input->input();
-        }
+        $input = new InputVar($this->app['apollo.cache']);
+        $input->input();
     }
 
 
